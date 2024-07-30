@@ -60,7 +60,7 @@ transition: fade-out
 <br>
 
 <div flex pt-12 items-center justify-end>
-  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10" v-after  v-click>
+  <span @click="$slidev.nav.next" class="px-2 py-1 rounded cursor-pointer" hover="bg-white bg-opacity-10" >
     下一页 <carbon:arrow-right class="inline"/>
   </span>
 </div>
@@ -90,58 +90,60 @@ Here is another comment.
 
 ---
 transition: slide-up
-level: 2
+
 ---
 
-# Navigation
+# unocss
 
-Hover on the bottom-left corner to see the navigation's controls panel, [learn more](https://sli.dev/guide/navigation.html)
+1. `vscode`插件安装 
+2. 配置文件
 
-## Keyboard Shortcuts
 
-|     |     |
-| --- | --- |
-| <kbd>right</kbd> / <kbd>space</kbd>| next animation or slide |
-| <kbd>left</kbd>  / <kbd>shift</kbd><kbd>space</kbd> | previous animation or slide |
-| <kbd>up</kbd> | previous slide |
-| <kbd>down</kbd> | next slide |
+<div v-click >
+<h2>1. vscode 插件安装</h2>
+<div flex  m-2 justify-between w-140 >
+<div>插件市场搜索<code>unocss</code>安装截图如下插件:</div>
+<img   src="/static/img/unocss.png" rounded w-40/>
+</div>
+</div>
+<div v-click  flex  m-2 justify-between w-165>
+  <div>然后重启<code>vscode</code>界面,如截图中<code>css</code>代码提示：</div>
+  <img   src="/static/img/unocss-1.png" rounded w-70 mt-2/>
+</div>
+
+
+
 
 <!-- https://sli.dev/guide/animations.html#click-animation -->
-<img
+<!-- <img
   v-click
   class="absolute -bottom-9 -left-7 w-80 opacity-50"
   src="https://sli.dev/assets/arrow-bottom-left.svg"
   alt=""
-/>
-<p v-after class="absolute bottom-23 left-45 opacity-30 transform -rotate-10">Here!</p>
+/> -->
+
 
 ---
-layout: two-cols
-layoutClass: gap-16
+transition: slide-up
+
 ---
 
-# Table of contents
+## 2.配置文件
+在`项目`根目录下含有`unocss.config.ts`的`ts`文件,是整个`unocss`配置文件,可以配置例如：
+1. 使用基于`属性化`的`css` :`presetAttributify`
+2. `transformers.transformerDirectives`使用`@apply`功能,更快速编写`style`中的`css`
+3. 自定义`rules`:可以添加自定义的`css`在`rules`
+4. `shortcuts`可以集合某些`unocss`种类...
 
-You can use the `Toc` component to generate a table of contents for your slides:
-
-```html
-<Toc minDepth="1" maxDepth="1"></Toc>
-```
-
-The title will be inferred from your slide content, or you can override it with `title` and `level` in your frontmatter.
-
-::right::
-
-<Toc v-click minDepth="1" maxDepth="2"></Toc>
+还有很多配置,具体的可以看`unocss.config.ts`文件以及[unocss](https://unocss.dev/)文档
 
 ---
 layout: image-right
 image: https://cover.sli.dev
 ---
 
-# Code
-
-Use code snippets and get the highlighting directly, and even types hover![^1]
+# auto-import
+利用`ts`使用`自动导出`功能：
 
 ```ts {all|5|7|7-8|10|all} twoslash
 // TwoSlash enables TypeScript hover information
