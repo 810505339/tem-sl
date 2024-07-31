@@ -100,7 +100,7 @@ transition: slide-up
 
 
 <div v-click >
-<h2>1. vscode 插件安装</h2>
+<h3>1. vscode 插件安装</h3>
 <div flex  m-2 justify-between w-140 >
 <div>插件市场搜索<code>unocss</code>安装截图如下插件:</div>
 <img   src="/static/img/unocss.png" rounded w-40/>
@@ -128,7 +128,7 @@ transition: slide-up
 
 ---
 
-## 2.配置文件
+### 2.配置文件
 在`项目`根目录下含有`unocss.config.ts`的`ts`文件,是整个`unocss`配置文件,可以配置例如：
 1. 使用基于`属性化`的`css` :`presetAttributify`
 2. `transformers.transformerDirectives`使用`@apply`功能,更快速编写`style`中的`css`
@@ -143,28 +143,44 @@ image: https://cover.sli.dev
 ---
 
 # auto-import
-利用`ts`使用`自动导出`功能：
-
-```ts {all|5|7|7-8|10|all} twoslash
-// TwoSlash enables TypeScript hover information
-// and errors in markdown code blocks
-// More at https://shiki.style/packages/twoslash
-
+利用`ts`和`vite`文件系统生成`自动导出`功能：
+该功能会在`/src/types/auto-import.d.ts` 生成全局的`.d.ts`
+````md magic-move {lines: true}
+```ts
+//之前
 import { computed, ref } from 'vue'
-
 const count = ref(0)
 const doubled = computed(() => count.value * 2)
-
-doubled.value = 2
 ```
 
-<arrow v-click="[4, 5]" x1="350" y1="310" x2="195" y2="334" color="#953" width="2" arrowSize="1" />
+```ts
+// 之后
+const count = ref(0)
+const doubled = computed(() => count.value * 2)
+```
+````
+<br/>
 
-<!-- This allow you to embed external code blocks -->
-<<< @/snippets/external.ts#snippet
+<h5 v-click>具体配置<code>vite.config.ts</code></h5>
 
-<!-- Footer -->
-[^1]: [Learn More](https://sli.dev/guide/line-highlighting)
+<v-click>
+
+```ts
+      AutoImport({
+        imports: ['vue', 'uni-app'], // 导入vue跟uniapp内部的函数
+        dts: 'src/types/auto-import.d.ts', // 生成的全局文件路径
+        dirs: ['src/hooks'], // 自动导入 hooks
+        eslintrc: { enabled: true }, // 解决eslint报错问题
+        vueTemplate: true, // vue模板内自动导入？  default false
+      }),
+```
+
+</v-click>
+
+
+
+
+
 
 <!-- Inline style -->
 <style>
